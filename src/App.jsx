@@ -11,28 +11,27 @@ export default function App() {
   // use set to filter by unique values
   const seasons = Array.from(new Set(sketches.map((sketch) => sketch.season)));
 
-  // TODO function to filter by season
-  const filterBySeason = (season) => {
-    setFilteredSketches(
-      sketches.filter((sketch) => {
-        return sketch.season === season;
-      })
-    );
-  };
+  function filterBySeason() {
+    console.log("Select!");
+  }
 
   return (
     <>
       <h1>I Think You Should Leave Database</h1>
       {/* select season */}
-      <label htmlFor="season"></label>
+      <label htmlFor="season">Select Season</label>
       <select
         name="select"
         id={season}
         onChange={(e) => filterBySeason(e.target.value)}
       >
-        <option value="">Select season</option>
+        <option value="">All</option>
         {seasons.map((season) => {
-          return <option key={season}>{season}</option>;
+          return (
+            <option key={season} value={season}>
+              Season {season}
+            </option>
+          );
         })}
       </select>
 
