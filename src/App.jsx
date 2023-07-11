@@ -7,12 +7,14 @@ export default function App() {
   const sketches = sketchData;
   const [filteredSketches, setFilteredSketches] = useState(sketchData);
   const [season, setSeason] = useState();
-
+  // initialize variable for seasons
   // use set to filter by unique values
   const seasons = Array.from(new Set(sketches.map((sketch) => sketch.season)));
 
-  function filterBySeason() {
-    console.log("Select!");
+  function filterBySeason(season) {
+    console.log("Select is working!");
+    setSeason(season);
+    console.log("season", season);
   }
 
   return (
