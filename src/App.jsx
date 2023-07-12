@@ -12,9 +12,14 @@ export default function App() {
   const seasons = Array.from(new Set(sketches.map((sketch) => sketch.season)));
 
   function filterBySeason(season) {
-    console.log("Select is working!");
+    // update state for season
     setSeason(season);
-    console.log("season", season);
+    // initialize variable to hold sketches in selected season
+    const filteredBySeason = sketches.filter(
+      (sketch) => sketch.season === Number(season)
+    );
+    // update filtered sketches with selected season
+    setFilteredSketches(filteredBySeason);
   }
 
   return (
