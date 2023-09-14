@@ -7,15 +7,23 @@ export default function App() {
   // initialize variables
   // get sketches object
   const sketches = sketchData;
-  // initialize variable to hold array of filter labels
-  const filterCategories = ["Season 1", "Season 2", "Season 3", "Includes Tim"];
+  // hold array of filter categories
+  const filterLabels = ["Season 1", "Season 2", "Season 3", "Includes Tim"];
 
-  // state
-  const [filteredSketches, setFilteredSketches] = useState(sketchData);
+  // TODO state
+  const [filterCategories, setFilterCategories] = useState([]);
 
   function toggleFilter(e) {
     console.log("I clicked on a checkbox!");
     console.log("Am I checked?", e);
+    // TODO if checked, add the filter category into filteredCategories
+    if (e) {
+      console.log("If");
+    }
+    // TODO if not checked, remove the filter category from filteredCategories
+    else {
+      console.log("Else");
+    }
   }
   function handleSubmit(e) {
     e.preventDefault();
@@ -26,7 +34,6 @@ export default function App() {
   }
   function resetFilters() {
     console.log("I clicked reset button!");
-    setFilteredSketches(sketches);
     // TODO uncheck inputs
   }
 
@@ -34,7 +41,7 @@ export default function App() {
     <>
       <h1>I Think You Should Leave Database</h1>
       <form onSubmit={handleSubmit}>
-        {filterCategories.map((category) => {
+        {filterLabels.map((category) => {
           return (
             <>
               <input
@@ -55,7 +62,7 @@ export default function App() {
       </form>
       {/* display sketches */}
       <ul>
-        {filteredSketches.map((sketch) => (
+        {sketches.map((sketch) => (
           <SketchCard key={sketch.id} {...sketch} />
         ))}
       </ul>
