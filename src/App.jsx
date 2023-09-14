@@ -13,13 +13,12 @@ export default function App() {
   // state
   const [filteredSketches, setFilteredSketches] = useState(sketchData);
   // TODO: how is this being used?
-  const [season, setSeason] = useState();
+  const [season, setSeason] = useState("");
   const [includesTim, setIncludesTim] = useState(false);
-
   // TODO: sync with checkbox toggle
   function filterBySeason(season) {
     // update state for season
-    // setSeason(season);
+    setSeason(season);
 
     // if "all" selected:
     if (season === "all") {
@@ -51,6 +50,11 @@ export default function App() {
     setFilteredSketches(filteredByTim);
   }
 
+  function resetFilters() {
+    setFilteredSketches(sketches);
+    // TODO: set select to "All"
+  }
+
   return (
     <>
       <h1>I Think You Should Leave Database</h1>
@@ -79,6 +83,9 @@ export default function App() {
       />
       <label htmlFor="includesTim">Only show sketches with Tim Robinson</label>
       {/* TODO: button to reset filters */}
+      <button type="button" onClick={resetFilters}>
+        Reset
+      </button>
       {/* display sketches */}
       <ul>
         {filteredSketches.map((sketch) => (
