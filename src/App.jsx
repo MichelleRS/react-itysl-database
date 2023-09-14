@@ -19,13 +19,21 @@ export default function App() {
   // TODO: sync with checkbox toggle
   function filterBySeason(season) {
     // update state for season
-    setSeason(season);
-    // initialize variable to hold sketches in selected season
-    const filteredBySeason = sketches.filter(
-      (sketch) => sketch.season === Number(season)
-    );
-    // update filtered sketches with selected season
-    setFilteredSketches(filteredBySeason);
+    // setSeason(season);
+
+    // if "all" selected:
+    if (season === "all") {
+      setFilteredSketches(sketches);
+    }
+    // if a season is selected
+    else {
+      // initialize variable to hold sketches in selected season
+      const filteredBySeason = sketches.filter(
+        (sketch) => sketch.season === Number(season)
+      );
+      // update filtered sketches with selected season
+      setFilteredSketches(filteredBySeason);
+    }
   }
 
   // TODO: toggle display of sketches
@@ -53,7 +61,7 @@ export default function App() {
         id="season"
         onChange={(e) => filterBySeason(e.target.value)}
       >
-        <option value="">All</option>
+        <option value="all">All</option>
         {seasons.map((season) => {
           return (
             <option key={season} value={season}>
