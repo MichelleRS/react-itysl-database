@@ -4,15 +4,19 @@ import SketchCard from "./components/SketchCard.jsx";
 import sketchData from "./sketch-data.js";
 
 export default function App() {
+  // initialize variables
+  // get sketches object
   const sketches = sketchData;
-  const [filteredSketches, setFilteredSketches] = useState(sketchData);
-  console.log("filteredSketches", filteredSketches);
-  const [season, setSeason] = useState();
-  const [includesTim, setIncludesTim] = useState(false);
-  // initialize variable for seasons
-  // use set to filter by unique values
+  // get seasons for select element; use set to filter by unique values
   const seasons = Array.from(new Set(sketches.map((sketch) => sketch.season)));
 
+  // state
+  const [filteredSketches, setFilteredSketches] = useState(sketchData);
+  // TODO: how is this being used?
+  const [season, setSeason] = useState();
+  const [includesTim, setIncludesTim] = useState(false);
+
+  // TODO: sync with checkbox toggle
   function filterBySeason(season) {
     // update state for season
     setSeason(season);
@@ -24,7 +28,7 @@ export default function App() {
     setFilteredSketches(filteredBySeason);
   }
 
-  // TODO - toggle display of sketches
+  // TODO: toggle display of sketches
   function toggleIncludesTim() {
     // update state for includesTim
     setIncludesTim(!includesTim);
@@ -36,16 +40,13 @@ export default function App() {
         return { ...sketch };
       }
     });
-    console.log("filteredByTim", filteredByTim);
     setFilteredSketches(filteredByTim);
-    console.log("filteredSketches in toggle", filteredSketches);
   }
 
   return (
     <>
       <h1>I Think You Should Leave Database</h1>
-      {/* select season */}
-      {/* TODO: fix console error: Incorrect use of <label for=FORM_ELEMENT> */}
+      {/* select: season */}
       <label htmlFor="season">Select Season</label>
       <select
         name="season"
@@ -61,16 +62,15 @@ export default function App() {
           );
         })}
       </select>
-      {/* sketches with only tim */}
+      {/* checkbox: toggle sketches with tim */}
       <input
         type="checkbox"
         id="includesTim"
         name="includesTim"
-        defaultChecked={false}
-        // checked={includesTim}
         onChange={(e) => toggleIncludesTim(e.target.value)}
       />
       <label htmlFor="includesTim">Only show sketches with Tim Robinson</label>
+      {/* TODO: button to reset filters */}
       {/* display sketches */}
       <ul>
         {filteredSketches.map((sketch) => (
