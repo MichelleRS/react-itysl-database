@@ -4,36 +4,50 @@ import SketchCard from "./components/SketchCard.jsx";
 import sketchData from "./sketch-data.js";
 
 export default function App() {
-  // initialize variables
-  // get sketches object
-  const sketches = sketchData;
-  // hold array of filter categories
+  // state
+  const [sketches, setSketches] = useState(sketchData);
+  const [filteredCategories, setFilteredCategories] = useState([]);
+
+  // hold array of labels for filter categories
   const filterLabels = ["Season 1", "Season 2", "Season 3", "Includes Tim"];
 
-  // TODO state
-  const [filterCategories, setFilterCategories] = useState([]);
+  // TODO rename currentTarget: checkbox, checkboxCategory
+  function toggleFilter(checked, currentTarget) {
+    console.log("I clicked on a checkbox! Am I checked?", checked);
+    // get filter category
+    let category = currentTarget.name;
+    console.log("filter category:", category);
 
-  function toggleFilter(e) {
-    console.log("I clicked on a checkbox!");
-    console.log("Am I checked?", e);
-    // TODO if checked, add the filter category into filteredCategories
-    if (e) {
-      console.log("If");
+    // when checked
+    if (checked) {
+      console.log("If `checked` is:", checked);
+      console.log("currentTarget", currentTarget);
+      // add to filtered categories
+      setFilteredCategories([...filteredCategories, currentTarget]);
     }
-    // TODO if not checked, remove the filter category from filteredCategories
+    // when unchecked
     else {
-      console.log("Else");
+      console.log("Else `checked` is:", checked);
+      // TODO remove from filteredCategories
     }
   }
   function handleSubmit(e) {
     e.preventDefault();
-    console.log("I applied the filters!");
-    console.log("e", e);
-    // TODO check filter categories selected
-    // TODO return sketches with those filter categories
+    console.log("I applied the filters! What is e?", e);
+    console.log(
+      "I applied the filters! What are the filterCategories?",
+      filteredCategories
+    );
+    e.target.style.border = "2px solid red";
+    console.log("I applied the filters!! What is e.target?", e.target);
+    // TODO search through the filteredCategories to get which filters were submitted
+
+    // TODO find all sketches in data that match categories checked (const filteredSketches)
+
+    // TODO update sketches with filteredSketches
   }
   function resetFilters() {
-    console.log("I clicked reset button!");
+    console.log("I clicked the reset button!");
     // TODO uncheck inputs
   }
 
@@ -49,7 +63,9 @@ export default function App() {
                 id={category}
                 key={category}
                 name={category}
-                onChange={(e) => toggleFilter(e.target.checked)}
+                onChange={(e) =>
+                  toggleFilter(e.target.checked, e.currentTarget)
+                }
               />
               <label htmlFor={category}>{category}</label>
             </>
