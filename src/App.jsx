@@ -9,28 +9,32 @@ export default function App() {
   const [filteredCategories, setFilteredCategories] = useState([]);
 
   // hold array of labels for filter categories
-  const filterLabels = ["Season 1", "Season 2", "Season 3", "Includes Tim"];
+  const checkboxLabels = ["Season 1", "Season 2", "Season 3", "Includes Tim"];
 
-  // TODO rename currentTarget: checkbox, checkboxCategory
-  function toggleFilter(checked, currentTarget) {
+  function toggleFilter(checked, checkboxEl) {
     console.log("I clicked on a checkbox! Am I checked?", checked);
     // get filter category
-    let category = currentTarget.name;
-    console.log("filter category:", category);
+    let category = checkboxEl.name;
+    console.log("category", category);
 
-    // when checked
+    // when checked, add to filtered categories
     if (checked) {
       console.log("If `checked` is:", checked);
-      console.log("currentTarget", currentTarget);
-      // add to filtered categories
-      setFilteredCategories([...filteredCategories, currentTarget]);
+      console.log("checkboxEl", checkboxEl);
+      setFilteredCategories([...filteredCategories, category]);
     }
-    // when unchecked
+    // when unchecked, remove from filteredCategories
     else {
       console.log("Else `checked` is:", checked);
-      // TODO remove from filteredCategories
+      console.log("checkboxEl", checkboxEl);
+      setFilteredCategories(
+        filteredCategories.filter(
+          (filteredCategory) => filteredCategory !== category
+        )
+      );
     }
   }
+
   function handleSubmit(e) {
     e.preventDefault();
     console.log("I applied the filters! What is e?", e);
@@ -46,6 +50,7 @@ export default function App() {
 
     // TODO update sketches with filteredSketches
   }
+
   function resetFilters() {
     console.log("I clicked the reset button!");
     // TODO uncheck inputs
@@ -55,7 +60,7 @@ export default function App() {
     <>
       <h1>I Think You Should Leave Database</h1>
       <form onSubmit={handleSubmit}>
-        {filterLabels.map((category) => {
+        {checkboxLabels.map((category) => {
           return (
             <>
               <input
