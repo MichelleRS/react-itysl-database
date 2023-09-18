@@ -37,18 +37,29 @@ export default function App() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    console.log("I applied the filters! What is e?", e);
-    console.log(
-      "I applied the filters! What are the filterCategories?",
-      filteredCategories
-    );
-    e.target.style.border = "2px solid red";
-    console.log("I applied the filters!! What is e.target?", e.target);
-    // TODO search through the filteredCategories to get which filters were submitted
+    // clear array of sketches
+    setSketches([]);
 
-    // TODO find all sketches in data that match categories checked (const filteredSketches)
-
-    // TODO update sketches with filteredSketches
+    // loop through sketch data to find sketches that match selected filter categories
+    for (let i in sketchData) {
+      let sketch = sketchData[i];
+      // filter category: season 1
+      if (sketch.season === 1 && filteredCategories.includes("Season 1")) {
+        // add sketch to sketches
+        setSketches((sketches) => [...sketches, sketch]);
+      }
+      // filter category: season 2
+      if (sketch.season === 2 && filteredCategories.includes("Season 2")) {
+        // add sketch to sketches
+        setSketches((sketches) => [...sketches, sketch]);
+      }
+      // filter category: season 3
+      if (sketch.season === 3 && filteredCategories.includes("Season 3")) {
+        // add sketch to sketches
+        setSketches((sketches) => [...sketches, sketch]);
+      }
+      // TODO filter category: includes tim
+    }
   }
 
   function resetFilters() {
