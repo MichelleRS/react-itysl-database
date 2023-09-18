@@ -39,6 +39,7 @@ export default function App() {
     e.preventDefault();
     // clear array of sketches
     setSketches([]);
+    console.log("filteredCategories.length", filteredCategories.length);
 
     // loop through sketch data to find sketches that match selected filter categories
     for (let i in sketchData) {
@@ -58,8 +59,28 @@ export default function App() {
         // add sketch to sketches
         setSketches((sketches) => [...sketches, sketch]);
       }
-      // TODO filter category: includes tim
+      // TODO: build 2 statements for "Includes Tim" filter category selection: (1) If any season and "Includes Tim" selected; (2) If only "Includes Tim" selected
+      // filter category: any season + includes tim
+      if (
+        filteredCategories.length > 1 &&
+        filteredCategories.includes("Includes Tim")
+      ) {
+        // loop through sketches and filter out any that do not include tim
+        setSketches((prevSketches) =>
+          prevSketches.filter((prevSketch) => prevSketch.includesTim)
+        );
+      }
+      // filter category: only includes tim
+      // TODO FIX: selecting only Includes Tim filter category renders no sketches.
+      // TRY: If number of filter categories is 1 and "Includes Tim", use sketch data to loop through and filter sketches with includesTim values of true.
+      if (
+        filteredCategories.length === 1 &&
+        filteredCategories.includes("Includes Tim")
+      ) {
+        console.log("I only chose the Includes Tim filter!!");
+      }
     }
+    console.log("sketches", sketches);
   }
 
   function resetFilters() {
